@@ -1,66 +1,61 @@
-package main.java.view;
+package main.java.view.panels;
 
 import main.java.controller.UsuarioController;
 import main.java.model.Usuario;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class UsuarioView extends JFrame {
+public class UsuarioPanel extends JPanel {
+    private MainPanel mainPanel;
     private UsuarioController controller;
     private JTable tabelaUsuarios;
     private DefaultTableModel tableModel;
 
-    public UsuarioView() {
+    public UsuarioPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         this.controller = new UsuarioController();
         initComponents();
         carregarDados();
     }
 
     private void initComponents() {
-        setTitle("Gerenciamento de Usuários");
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        // Painel principal
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        setLayout(new BorderLayout());
 
         // Painel de tabela
         tableModel = new DefaultTableModel(new Object[]{"ID", "Tipo", "Nome", "Data Nasc.", "Curso"}, 0);
         tabelaUsuarios = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(tabelaUsuarios);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
 
         // Painel de botões
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         JButton btnAdicionar = new JButton("Adicionar");
         JButton btnEditar = new JButton("Editar");
         JButton btnRemover = new JButton("Remover");
         JButton btnAtualizar = new JButton("Atualizar");
+        JButton btnVoltar = new JButton("Voltar ao Menu");
 
         buttonPanel.add(btnAdicionar);
         buttonPanel.add(btnEditar);
         buttonPanel.add(btnRemover);
         buttonPanel.add(btnAtualizar);
+        buttonPanel.add(btnVoltar);
 
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         // Listeners
         btnAdicionar.addActionListener(e -> adicionarUsuario());
         btnEditar.addActionListener(e -> editarUsuario());
         btnRemover.addActionListener(e -> removerUsuario());
         btnAtualizar.addActionListener(e -> carregarDados());
-
-        add(mainPanel);
+        btnVoltar.addActionListener(e -> mainPanel.showPanel("MENU"));
     }
 
     private void carregarDados() {
@@ -211,12 +206,5 @@ public class UsuarioView extends JFrame {
                         "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            UsuarioView view = new UsuarioView();
-            view.setVisible(true);
-        });
     }
 }
