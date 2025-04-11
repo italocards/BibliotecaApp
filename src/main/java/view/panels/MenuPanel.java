@@ -21,6 +21,7 @@ public class MenuPanel extends JPanel {
         JButton btnEmprestimos = new JButton("Empréstimos");
 
         btnUsuarios.addActionListener(e -> mainPanel.showPanel("USUARIOS"));
+        btnObras.addActionListener(e -> mainPanel.showPanel("OBRAS"));
         // Adicione listeners para os outros botões
 
         buttonPanel.add(btnUsuarios);

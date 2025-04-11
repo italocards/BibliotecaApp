@@ -13,6 +13,7 @@ public class MainPanel extends JPanel {
         // Registrar todos os painéis
         add(new MenuPanel(this), "MENU");
         add(new UsuarioPanel(this), "USUARIOS");
+        add(new ObrasPanel(this), "OBRAS");
 
         // Mostrar o painel inicial
         showPanel("MENU");
