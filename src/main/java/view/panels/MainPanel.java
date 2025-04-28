@@ -14,6 +14,7 @@ public class MainPanel extends JPanel {
         add(new MenuPanel(this), "MENU");
         add(new UsuarioPanel(this), "USUARIOS");
         add(new ObrasPanel(this), "OBRAS");
+        add(new EmprestimoPanel(this), "EMPRESTIMOS");
 
         // Mostrar o painel inicial
         showPanel("MENU");
