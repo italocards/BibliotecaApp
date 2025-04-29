@@ -43,4 +43,9 @@ public class Obra {
 
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    @Override
+    public String toString() {
+        return this.titulo; // Retorna apenas o título da obra
+    }
 }
